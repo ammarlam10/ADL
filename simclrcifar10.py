@@ -64,6 +64,15 @@ cifar10_dm = CIFAR10DataModule(
     val_transforms=test_transforms,
 )
 
+
+it = iter(cifar10_dm)
+first = next(it)
+second = next(it)
+
+print(len(first))
+exit()
+
+
 #cifar10_dm.train_transforms = train_transforms
 #cifar10_dm.test_transforms = test_transforms
 
