@@ -1,4 +1,4 @@
-'''from pl_bolts.models.self_supervised import SimCLR
+from pl_bolts.models.self_supervised import SimCLR
 from pl_bolts.models.self_supervised.simclr import SimCLREvalDataTransform, SimCLRTrainDataTransform
 
 
@@ -241,7 +241,7 @@ class LitResnet(LightningModule):
 
 model = LitResnet(lr=0.05)
 
-trainer = Trainer(
+trainer =  (
     max_epochs=30,
     accelerator="auto",
     devices=1 if torch.cuda.is_available() else None,  # limiting got iPython runs
@@ -253,9 +253,5 @@ trainer.fit(model, cifar10_dm)
 trainer.test(model, datamodule=cifar10_dm)
 
 
+'''
 
-# Additional information
-EPOCH = 10
-PATH = "./cifar10model.pt"
-
-torch.save({'model_state_dict': model.state_dict()}, PATH)
