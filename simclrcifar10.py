@@ -294,8 +294,8 @@ embedder = ImageEmbedder(
     pretraining_transform_kwargs={"size_crops": [32]},
 )
 
-# 3. Create the trainer and pre-train the encoder
-trainer = flash.Trainer(max_epochs=1, gpus=torch.cuda.device_count(),
+# 3. Create the trainer and pre-train the encoder torch.cuda.device_count()
+trainer = flash.Trainer(strategy="ddp",max_epochs=1, gpus=1,
     callbacks=[LearningRateMonitor(logging_interval="step"), TQDMProgressBar(refresh_rate=10)])
 trainer.fit(embedder, datamodule=datamodule)
 
