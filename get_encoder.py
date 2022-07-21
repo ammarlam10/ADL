@@ -94,7 +94,7 @@ ch=torch.load(weight_path)
 
 print(len(ch['model_state_dict']))
 
-model.load_state_dict(torch.load(weight_path))
+model.load_state_dict(ch['model_state_dict'])
 
 
 
