@@ -85,11 +85,12 @@ print('Train length',len(train_data_loader.dataset))
 # val_dataset = MyDataset(transforms=SimCLREvalDataTransform())
 
 # simclr needs a lot of compute!
-model = SimCLR(max_epochs=100,num_samples=len(train_data_loader.dataset), batch_size=512, gpus=4,dataset='cifar10')
+model = SimCLR(max_epochs=100,num_samples=len(train_data_loader.dataset), batch_size=512, gpus=1,dataset='cifar10')
 
 
 
-trainer = Trainer(devices=4, accelerator="gpu",callbacks=[TQDMProgressBar(refresh_rate=10)])
+trainer = Trainer(devices=1, accelerator="gpu",callbacks=[TQDMProgressBar(refresh_rate=10)])
+print('TRAINER')
 
 trainer.fit(
     model,
