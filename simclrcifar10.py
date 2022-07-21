@@ -35,7 +35,7 @@ NUM_WORKERS = int(os.cpu_count() / 2)
 
 
 # define train transformer
-'''train_transforms = torchvision.transforms.Compose(
+train_transforms = torchvision.transforms.Compose(
     [
         torchvision.transforms.RandomCrop(32, padding=4),
         torchvision.transforms.RandomHorizontalFlip(),
@@ -52,50 +52,59 @@ test_transforms = torchvision.transforms.Compose(
         cifar10_normalization(),
     ]
 )
-'''
-#cifar10_dm = CIFAR10DataModule(
-#    data_dir=PATH_DATASETS,
-#    batch_size=BATCH_SIZE,
-#    num_workers=NUM_WORKERS,
-#    train_transforms=train_transforms,
-#    test_transforms=test_transforms,
-#    val_transforms=test_transforms,
-#)
 
+cifar10_dm = CIFAR10DataModule(
+    data_dir="/workspace/DATA",
+    batch_size=512,
+    num_workers=4,
+    train_transforms=train_transforms,
+    test_transforms=test_transforms,
+    val_transforms=test_transforms,
+)
+
+#cifar10_dm.train_transforms = train_transforms
+#cifar10_dm.test_transforms = test_transforms
 
 # DATASET transform=train_transforms,
-cifar10_data_train = torchvision.datasets.CIFAR10('../',  train=True,download=True)
+#cifar10_data_train = torchvision.datasets.CIFAR10('../',  train=True,download=True)
 
 # train loader
-train_data_loader = torch.utils.data.DataLoader(cifar10_data_train,
-                                          batch_size=512,
-                                          shuffle=True,
-                                          num_workers=4)
+#train_data_loader = torch.utils.data.DataLoader(cifar10_data_train,
+#                                          batch_size=512,
+#                                          shuffle=True,
+#                                          num_workers=4)
  #transform=test_transforms
-cifar10_data_test = torchvision.datasets.CIFAR10('../', train=False,download=True)
-test_data_loader = torch.utils.data.DataLoader(cifar10_data_test,
-                                          batch_size=512,
-                                          shuffle=True,
-                                          num_workers=4)
+#cifar10_data_test = torchvision.datasets.CIFAR10('../', train=False,download=True)
+#test_data_loader = torch.utils.data.DataLoader(cifar10_data_test,
+#                                          batch_size=512,
+#                                          shuffle=True,
+#                                          num_workers=4)
 
-print('Train length',len(train_data_loader.dataset))
+
+#print('Train length',len(train_data_loader.dataset))
 #exit()
 
 # train_dataset = MyDataset(transforms=SimCLRTrainDataTransform())
 # val_dataset = MyDataset(transforms=SimCLREvalDataTransform())
 
 # simclr needs a lot of compute!
-model = SimCLR(max_epochs=100,num_samples=len(train_data_loader.dataset), batch_size=512, gpus=1,dataset='cifar10')
+# model = SimCLR(max_epochs=100,num_samples=len(train_data_loader.dataset), batch_size=512, gpus=1,dataset='cifar10')
+model = SimCLR(max_epochs=100,num_samples=cifar10_dm.num_samples, batch_size=512, gpus=1,dataset='cifar10')
 
 
 
-# trainer = Trainer(devices=1, accelerator="gpu",callbacks=[TQDMProgressBar(refresh_rate=10)])
-trainer = Trainer(devices=1, accelerator="gpu")
+trainer = Trainer(devices=1, accelerator="gpu",callbacks=[TQDMProgressBar(refresh_rate=10)])
+# trainer = Trainer(devices=1, accelerator="gpu")
 print('TRAINER')
+
+#trainer.fit(
+#    model,
+#    train_data_loader,
+#)
 
 trainer.fit(
     model,
-    train_data_loader,
+    cifar10_dm,
 )
 
 
