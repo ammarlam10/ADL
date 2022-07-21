@@ -59,9 +59,9 @@ cifar10_dm = CIFAR10DataModule(
     data_dir="/workspace/DATA",
     batch_size=512,
     num_workers=4,
-    train_transforms=SimCLRTrainDataTransform,
-    test_transforms=SimCLREvalDataTransform,
-    val_transforms=SimCLREvalDataTransform,
+    train_transforms=train_transforms,
+    test_transforms=train_transforms,
+    val_transforms=test_transforms,
 )
 
 #cifar10_dm.train_transforms = train_transforms
