@@ -283,7 +283,7 @@ datamodule = ImageClassificationData.from_datasets(
 
 # 2. Build the task
 embedder = ImageEmbedder(
-    backbone="resnet18",
+    backbone="resnet",
     training_strategy="simclr",
     head="simclr_head",
     pretraining_transform="simclr_transform",
