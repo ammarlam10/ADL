@@ -75,7 +75,7 @@ test_data_loader = torch.utils.data.DataLoader(cifar10_data_test,
                                           shuffle=True,
                                           num_workers=4)
 
-print('Train length',len(train_data_loader.cifar10_data_train))
+print('Train length',len(train_data_loader.dataset))
 exit()
 
 # train_dataset = MyDataset(transforms=SimCLRTrainDataTransform())
