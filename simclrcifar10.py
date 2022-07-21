@@ -18,6 +18,9 @@ from pytorch_lightning import LightningModule, Trainer, seed_everything
 #from torch.optim.swa_utils import AveragedModel, update_bn
 from torchmetrics.functional import accuracy
 
+from pytorch_lightning.callbacks import TQDMProgressBar
+
+
 
 
 seed_everything(7)
@@ -76,15 +79,17 @@ test_data_loader = torch.utils.data.DataLoader(cifar10_data_test,
                                           num_workers=4)
 
 print('Train length',len(train_data_loader.dataset))
-exit()
+#exit()
 
 # train_dataset = MyDataset(transforms=SimCLRTrainDataTransform())
 # val_dataset = MyDataset(transforms=SimCLREvalDataTransform())
 
 # simclr needs a lot of compute!
-model = SimCLR(num_samples=2, batch_size=512, gpus=4,dataset='cifar10',arch="resnet18")
+model = SimCLR(num_samples=len(train_data_loader.dataset), batch_size=512, gpus=4,dataset='cifar10',arch="resnet18")
 
-trainer = Trainer(tpu_cores=128)
+
+
+trainer = Trainer(tpu_cores=128,callbacks=[TQDMProgressBar(refresh_rate=10)])
 trainer.fit(
     model,
     train_data_loader,
