@@ -271,6 +271,9 @@ import torch
 from torchvision.datasets import CIFAR10
 from pytorch_lightning.callbacks import LearningRateMonitor
 
+from pytorch_lightning.callbacks import TQDMProgressBar
+
+
 import flash
 from flash.core.data.utils import download_data
 from flash.image import ImageClassificationData, ImageEmbedder
