@@ -14,9 +14,9 @@ datamodule = ImageClassificationData.from_datasets(
 # 2. Build the task
 embedder = ImageEmbedder(
     backbone="resnet",
-    training_strategy="barlow_twins",
-    head="barlow_twins_head",
-    pretraining_transform="barlow_twins_transform",
+    training_strategy="simclr",
+    head="simclr_head",
+    pretraining_transform="simclr_transform",
     training_strategy_kwargs={"latent_embedding_dim": 128},
     pretraining_transform_kwargs={"size_crops": [32]},
 )
