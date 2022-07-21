@@ -295,7 +295,7 @@ embedder = ImageEmbedder(
 )
 
 # 3. Create the trainer and pre-train the encoder torch.cuda.device_count()
-trainer = flash.Trainer(strategy="ddp_spawn",max_epochs=1, gpus=torch.cuda.device_count(),
+trainer = flash.Trainer(strategy="deepspeed",max_epochs=1, gpus=torch.cuda.device_count(),
     callbacks=[LearningRateMonitor(logging_interval="step"), TQDMProgressBar(refresh_rate=10)])
 trainer.fit(embedder, datamodule=datamodule)
 
