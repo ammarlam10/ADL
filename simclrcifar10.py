@@ -82,7 +82,7 @@ test_data_loader = torch.utils.data.DataLoader(cifar10_data_test,
 # val_dataset = MyDataset(transforms=SimCLREvalDataTransform())
 
 # simclr needs a lot of compute!
-model = SimCLR(num_samples=, batch_size=512, gpus=4,dataset='cifar10',arch="resnet18")
+model = SimCLR(num_samples=2, batch_size=512, gpus=4,dataset='cifar10',arch="resnet18")
 
 trainer = Trainer(tpu_cores=128)
 trainer.fit(
