@@ -22,6 +22,8 @@ embedder = ImageEmbedder(
 )
 
 
+
+
 model = embedder.load_from_checkpoint("image_embedder_simclr.pt")
 
 
