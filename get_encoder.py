@@ -90,6 +90,10 @@ weight_path = 'cifar10model.pt'
 
 model = LitResnet(lr=0.05)
 
+ch=torch.load(weight_path)
+
+print(ch)
+
 model.load_state_dict(torch.load(weight_path))
 
 
