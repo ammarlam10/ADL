@@ -31,7 +31,7 @@ exit()
 NUM_WORKERS = int(os.cpu_count() / 2)
 
 
-
+# define train transformer
 train_transforms = torchvision.transforms.Compose(
     [
         torchvision.transforms.RandomCrop(32, padding=4),
@@ -41,6 +41,8 @@ train_transforms = torchvision.transforms.Compose(
     ]
 )
 
+# Define test transformer
+
 test_transforms = torchvision.transforms.Compose(
     [
         torchvision.transforms.ToTensor(),
@@ -48,18 +50,20 @@ test_transforms = torchvision.transforms.Compose(
     ]
 )
 
-cifar10_dm = CIFAR10DataModule(
-    data_dir=PATH_DATASETS,
-    batch_size=BATCH_SIZE,
-    num_workers=NUM_WORKERS,
-    train_transforms=train_transforms,
-    test_transforms=test_transforms,
-    val_transforms=test_transforms,
-)
+#cifar10_dm = CIFAR10DataModule(
+#    data_dir=PATH_DATASETS,
+#    batch_size=BATCH_SIZE,
+#    num_workers=NUM_WORKERS,
+#    train_transforms=train_transforms,
+#    test_transforms=test_transforms,
+#    val_transforms=test_transforms,
+#)
 
 
-
+# DATASET
 cifar10_data_train = torchvision.datasets.CIFAR10('./', transform=train_transforms, train=True,download=True)
+
+# train loader
 train_data_loader = torch.utils.data.DataLoader(cifar10_data_train,
                                           batch_size=512,
                                           shuffle=True,
