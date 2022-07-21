@@ -62,8 +62,7 @@ test_transforms = torchvision.transforms.Compose(
 
 # DATASET
 cifar10_data_train = torchvision.datasets.CIFAR10('../', transform=train_transforms, train=True,download=True)
-print('Train length',len(cifar10_data_train))
-exit()
+
 # train loader
 train_data_loader = torch.utils.data.DataLoader(cifar10_data_train,
                                           batch_size=512,
@@ -76,7 +75,8 @@ test_data_loader = torch.utils.data.DataLoader(cifar10_data_test,
                                           shuffle=True,
                                           num_workers=4)
 
-
+print('Train length',len(train_data_loader.cifar10_data_train))
+exit()
 
 # train_dataset = MyDataset(transforms=SimCLRTrainDataTransform())
 # val_dataset = MyDataset(transforms=SimCLREvalDataTransform())
