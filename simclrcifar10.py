@@ -61,7 +61,7 @@ test_transforms = torchvision.transforms.Compose(
 
 
 # DATASET
-cifar10_data_train = torchvision.datasets.CIFAR10('./', transform=train_transforms, train=True,download=True)
+cifar10_data_train = torchvision.datasets.CIFAR10('../', transform=train_transforms, train=True,download=True)
 
 # train loader
 train_data_loader = torch.utils.data.DataLoader(cifar10_data_train,
@@ -69,7 +69,7 @@ train_data_loader = torch.utils.data.DataLoader(cifar10_data_train,
                                           shuffle=True,
                                           num_workers=4)
 
-cifar10_data_test = torchvision.datasets.CIFAR10('./', transform=test_transforms, train=False,download=True)
+cifar10_data_test = torchvision.datasets.CIFAR10('../', transform=test_transforms, train=False,download=True)
 test_data_loader = torch.utils.data.DataLoader(cifar10_data_test,
                                           batch_size=512,
                                           shuffle=True,
@@ -81,7 +81,8 @@ test_data_loader = torch.utils.data.DataLoader(cifar10_data_test,
 # val_dataset = MyDataset(transforms=SimCLREvalDataTransform())
 
 # simclr needs a lot of compute!
-model = SimCLR(dataset='cifar10')
+model = SimCLR(dataset='cifar10',arch="resnet18")
+
 trainer = Trainer(tpu_cores=128)
 trainer.fit(
     model,
@@ -92,8 +93,7 @@ trainer.fit(
 
 
 # Additional information
-EPOCH = 5
+EPOCH = 10
 PATH = "./cifar10model.pt"
-LOSS = 0.4
 
 torch.save({'model_state_dict': model.state_dict()}, PATH)
