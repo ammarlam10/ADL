@@ -102,7 +102,7 @@ model.load_state_dict(ch['model_state_dict'])
 #weight_path = 'cifar10model.pt'
 #simclr = SimCLR.load_from_checkpoint(weight_path, strict=False)
 
-simclr_resnet50 = simclr.encoder
+simclr_resnet50 = model.encoder
 #simclr_resnet50.eval()
 
 print(simclr_resnet50)
