@@ -92,7 +92,7 @@ model = LitResnet(lr=0.05)
 
 ch=torch.load(weight_path)
 
-print(ch['model_state_dict'])
+print(ch['model_state_dict'][-1])
 
 model.load_state_dict(torch.load(weight_path))
 
