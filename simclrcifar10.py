@@ -62,7 +62,8 @@ test_transforms = torchvision.transforms.Compose(
 
 # DATASET
 cifar10_data_train = torchvision.datasets.CIFAR10('../', transform=train_transforms, train=True,download=True)
-
+print('Train length',len(cifar10_data_train))
+exit()
 # train loader
 train_data_loader = torch.utils.data.DataLoader(cifar10_data_train,
                                           batch_size=512,
@@ -81,7 +82,7 @@ test_data_loader = torch.utils.data.DataLoader(cifar10_data_test,
 # val_dataset = MyDataset(transforms=SimCLREvalDataTransform())
 
 # simclr needs a lot of compute!
-model = SimCLR(dataset='cifar10',arch="resnet18")
+model = SimCLR(num_samples=, batch_size=512, gpus=4,dataset='cifar10',arch="resnet18")
 
 trainer = Trainer(tpu_cores=128)
 trainer.fit(
