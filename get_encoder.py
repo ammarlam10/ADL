@@ -24,7 +24,9 @@ embedder = ImageEmbedder(
 
 
 
-model = embedder.load_from_checkpoint("image_embedder_simclr.pt")
+# model = embedder.load_from_checkpoint("image_embedder_simclr.pt")
+
+embedder.load_state_dict(torch.load("image_embedder_simclr.pt"))
 
 
 # 3. Create the trainer and pre-train the encoder
