@@ -89,7 +89,8 @@ model = SimCLR(max_epochs=100,num_samples=len(train_data_loader.dataset), batch_
 
 
 
-trainer = Trainer(devices=1, accelerator="gpu",callbacks=[TQDMProgressBar(refresh_rate=10)])
+# trainer = Trainer(devices=1, accelerator="gpu",callbacks=[TQDMProgressBar(refresh_rate=10)])
+trainer = Trainer(devices=1, accelerator="gpu")
 print('TRAINER')
 
 trainer.fit(
