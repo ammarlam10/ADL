@@ -13,7 +13,7 @@ datamodule = ImageClassificationData.from_datasets(
 
 # 2. Build the task
 embedder = ImageEmbedder(
-    backbone="resnet18",
+    backbone="resnet",
     training_strategy="barlow_twins",
     head="barlow_twins_head",
     pretraining_transform="barlow_twins_transform",
