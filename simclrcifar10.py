@@ -284,6 +284,9 @@ datamodule = ImageClassificationData.from_datasets(
     batch_size=8,
 )
 
+print(datamodule)
+
+'''
 # 2. Build the task
 embedder = ImageEmbedder(
     backbone="resnet",
@@ -316,3 +319,5 @@ trainer.save_checkpoint("image_embedder_simclr.pt")
 
 # list of embeddings for images sent to the predict function
 #print(embeddings)
+
+'''
