@@ -116,11 +116,12 @@ data_transform = transforms.Compose([
 
 
 datamodule = ImageClassificationData.from_folders(
+    num_workers=256,
     train_folder='/workspace/DATA/C. Diabetic Retinopathy Grading/train',
-    val_folder='/workspace/DATA/C. Diabetic Retinopathy Grading/train',
+    #val_folder='/workspace/DATA/C. Diabetic Retinopathy Grading/train',
     batch_size=128,
     train_transform =  data_transform,
-    val_transform =  data_transform
+    #val_transform =  data_transform
     #transform_kwargs={"image_size": (512, 512),},
 )
 
