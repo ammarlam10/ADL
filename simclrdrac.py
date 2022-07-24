@@ -41,7 +41,7 @@ class DRACDataModule(pl.LightningDataModule):
 #         MNIST(self.data_dir, train=True, download=True)
 #         MNIST(self.data_dir, train=False, download=True)
 
-    def setup(self, stage: Optional[str] = None):
+    def setup(self, stage = None):
 
         # Assign train/val datasets for use in dataloaders
         if stage == "fit" or stage is None:
