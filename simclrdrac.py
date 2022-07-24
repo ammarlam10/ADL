@@ -46,7 +46,7 @@ class DRACDataModule(pl.LightningDataModule):
 
         # Assign train/val datasets for use in dataloaders
         if stage == "fit" or stage is None:
-            self.data_full = datasets.ImageFolder(root=self.data_dir,transform=self.transform)
+            data_full = datasets.ImageFolder(root=self.data_dir,transform=self.transform)
             #print(len(data_full))
             self.data_train, self.data_val = random_split(data_full, [511, 100])
 
