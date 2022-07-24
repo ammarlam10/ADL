@@ -45,9 +45,9 @@ class DRACDataModule(pl.LightningDataModule):
 
         # Assign train/val datasets for use in dataloaders
         if stage == "fit" or stage is None:
-            data_full = datasets.ImageFolder(root=self.data_dir,transform=self.transform)
-            print(len(data_full))
-            self.data_train, self.data_val = random_split(data_full, [511, 100])
+            self.data_full = datasets.ImageFolder(root=self.data_dir,transform=self.transform)
+            #print(len(data_full))
+            #self.data_train, self.data_val = random_split(data_full, [511, 100])
 
         # Assign test dataset for use in dataloader(s)
         #if stage == "test" or stage is None:
@@ -57,10 +57,10 @@ class DRACDataModule(pl.LightningDataModule):
        #     self.mnist_predict = MNIST(self.data_dir, train=False, transform=self.transform)
 
     def train_dataloader(self):
-        return DataLoader(self.data_train, batch_size=256, num_workers=8)
+        return DataLoader(self.data_full, batch_size=256, num_workers=8)
 
-    def val_dataloader(self):
-        return DataLoader(self.data_val, batch_size=256, num_workers=8)
+    #def val_dataloader(self):
+    #    return DataLoader(self.data_val, batch_size=256, num_workers=8)
 
 #     def test_dataloader(self):
 #         return DataLoader(self.mnist_test, batch_size=32)
