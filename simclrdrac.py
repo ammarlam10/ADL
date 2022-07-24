@@ -108,8 +108,8 @@ datamodule = DRACDataModule(data_dir='/workspace/DATA/C. Diabetic Retinopathy Gr
 #    batch_size=8,
 #)
 
-#print(datamodule)
-
+print(datamodule)
+exit()
 
 # 2. Build the task
 embedder = ImageEmbedder(
@@ -124,6 +124,7 @@ embedder = ImageEmbedder(
 # 3. Create the trainer and pre-train the encoder torch.cuda.device_count()
 trainer = flash.Trainer(strategy='ddp',max_epochs=1, gpus=1,
     callbacks=[LearningRateMonitor(logging_interval="step"), TQDMProgressBar(refresh_rate=10)])
+
 trainer.fit(embedder, datamodule=datamodule)
 
 # 4. Save the model!
