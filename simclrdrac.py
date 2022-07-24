@@ -29,6 +29,8 @@ from torchvision.datasets import MNIST
 from torchvision import transforms
 
 
+
+'''
 class DRACDataModule(pl.LightningDataModule):
     def __init__(self, data_dir: str = "./", transformer: str = "./",batch_size=64):
         super().__init__()
@@ -72,6 +74,7 @@ class DRACDataModule(pl.LightningDataModule):
     def predict_dataloader(self):
          return DataLoader(self.data_predict, batch_size=self.batch_size, num_workers=8)
 
+'''
 
 
 
@@ -101,7 +104,8 @@ data_transform = transforms.Compose([
 #                                             num_workers=1)
 
 
-datamodule = DRACDataModule(data_dir='/workspace/DATA/C. Diabetic Retinopathy Grading', transformer=data_transform)
+#datamodule = DRACDataModule(data_dir='/workspace/DATA/C. Diabetic Retinopathy Grading', transformer=data_transform)
+
 
 #ImageClassificationData.from_datasets(
 #    train_dataset=CIFAR10("/workspace/DATA", download=False),
@@ -109,6 +113,27 @@ datamodule = DRACDataModule(data_dir='/workspace/DATA/C. Diabetic Retinopathy Gr
 #)
 
 #print(datamodule)
+
+
+datamodule = ImageClassificationData.from_folders(
+    train_folder='/workspace/DATA/C. Diabetic Retinopathy Grading/train',
+    val_folder='/workspace/DATA/C. Diabetic Retinopathy Grading/train',
+    batch_size=128,
+    train_transform =  data_transform,
+    val_transform =  data_transform
+    #transform_kwargs={"image_size": (512, 512),},
+)
+
+
+
+
+print(datamodule)
+exit()
+
+
+
+
+
 
 # 2. Build the task
 embedder = ImageEmbedder(
