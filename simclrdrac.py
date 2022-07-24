@@ -128,7 +128,6 @@ datamodule = ImageClassificationData.from_folders(
 
 
 print(datamodule)
-exit()
 
 
 
