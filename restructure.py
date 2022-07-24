@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-path_to_dir='/workspace/DATA/C. Diabetic Retinopathy Grading'
+path_to_dir='/workspace/DATA/C. Diabetic Retinopathy Grading/'
 
 from os import listdir
 from os.path import isfile, join
