@@ -66,10 +66,10 @@ class DRACDataModule(pl.LightningDataModule):
     def val_dataloader(self):
         return DataLoader(self.data_val, batch_size=self.batch_size, num_workers=8)
 
-     def test_dataloader(self):
+    def test_dataloader(self):
          return DataLoader(self.data_test, batch_size=self.batch_size, num_workers=8)
 
-     def predict_dataloader(self):
+    def predict_dataloader(self):
          return DataLoader(self.data_predict, batch_size=self.batch_size, num_workers=8)
 
 
