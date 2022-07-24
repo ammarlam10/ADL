@@ -30,14 +30,14 @@ from torchvision import transforms
 
 
 class DRACDataModule(pl.LightningDataModule):
-    def __init__(self, data_dir: str = "./", transformer: str = "./",batch_size=512):
+    def __init__(self, data_dir: str = "./", transformer: str = "./",batch_size=64):
         super().__init__()
         self.data_dir = data_dir
         self.transform = transformer
         self.batch_size = batch_size
         
     def prepare_data(self):
-        print('Already downloaded')
+        print('already downloaded')
         # download
 #         MNIST(self.data_dir, train=True, download=True)
 #         MNIST(self.data_dir, train=False, download=True)
@@ -48,26 +48,29 @@ class DRACDataModule(pl.LightningDataModule):
         if stage == "fit" or stage is None:
             self.data_full = datasets.ImageFolder(root=self.data_dir,transform=self.transform)
             #print(len(data_full))
-            #self.data_train, self.data_val = random_split(data_full, [511, 100])
+            self.data_train, self.data_val = random_split(data_full, [511, 100])
 
         # Assign test dataset for use in dataloader(s)
-        #if stage == "test" or stage is None:
+        if stage == "test" or stage is None:
+            self.data_test = datasets.ImageFolder(root=self.data_dir,transform=self.transform)
+
         #    self.data_test = MNIST(self.data_dir, train=False, transform=self.transform)
 
-        #if stage == "predict" or stage is None:
+        if stage == "predict" or stage is None:
+            self.data_predict = datasets.ImageFolder(root=self.data_dir,transform=self.transform)
        #     self.mnist_predict = MNIST(self.data_dir, train=False, transform=self.transform)
 
     def train_dataloader(self):
-        return DataLoader(self.data_full, batch_size=self.batch_size , num_workers=8)
+        return DataLoader(self.data_train, batch_size=self.batch_size , num_workers=8)
 
-    #def val_dataloader(self):
-    #    return DataLoader(self.data_val, batch_size=256, num_workers=8)
+    def val_dataloader(self):
+        return DataLoader(self.data_val, batch_size=self.batch_size, num_workers=8)
 
-#     def test_dataloader(self):
-#         return DataLoader(self.mnist_test, batch_size=32)
+     def test_dataloader(self):
+         return DataLoader(self.data_test, batch_size=self.batch_size, num_workers=8)
 
-#     def predict_dataloader(self):
-#         return DataLoader(self.mnist_predict, batch_size=32)
+     def predict_dataloader(self):
+         return DataLoader(self.data_predict, batch_size=self.batch_size, num_workers=8)
 
 
 
