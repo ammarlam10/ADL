@@ -12,7 +12,7 @@ datamodule = ImageClassificationData.from_datasets(
 )
 
 # 2. Build the task
-model = ImageEmbedder(
+imgemb = ImageEmbedder(
     backbone="resnet",
     training_strategy="simclr",
     head="simclr_head",
@@ -26,7 +26,7 @@ model = ImageEmbedder(
 # model = my_model(layers=3, drop_rate=0)
 trainer = flash.Trainer(max_epochs=1, gpus=torch.cuda.device_count())
 
-model2 = model.load_from_checkpoint("image_embedder_simclr.pt")
+model2 = imgemb.model.load_from_checkpoint("image_embedder_simclr.pt")
 
 results = trainer.test(model=model2, datamodule=my_datamodule, verbose=True)
 
