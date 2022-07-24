@@ -108,8 +108,7 @@ datamodule = DRACDataModule(data_dir='/workspace/DATA/C. Diabetic Retinopathy Gr
 #    batch_size=8,
 #)
 
-print(datamodule)
-exit()
+#print(datamodule)
 
 # 2. Build the task
 embedder = ImageEmbedder(
