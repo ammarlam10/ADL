@@ -30,10 +30,11 @@ from torchvision import transforms
 
 
 class DRACDataModule(pl.LightningDataModule):
-    def __init__(self, data_dir: str = "./", transformer: str = "./",):
+    def __init__(self, data_dir: str = "./", transformer: str = "./",batch_size=512):
         super().__init__()
         self.data_dir = data_dir
         self.transform = transformer
+        self.batch_size = batch_size
         
     def prepare_data(self):
         print('Already downloaded')
@@ -57,7 +58,7 @@ class DRACDataModule(pl.LightningDataModule):
        #     self.mnist_predict = MNIST(self.data_dir, train=False, transform=self.transform)
 
     def train_dataloader(self):
-        return DataLoader(self.data_full, batch_size=256, num_workers=8)
+        return DataLoader(self.data_full, batch_size=self.batch_size , num_workers=8)
 
     #def val_dataloader(self):
     #    return DataLoader(self.data_val, batch_size=256, num_workers=8)
