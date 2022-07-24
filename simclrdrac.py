@@ -47,7 +47,7 @@ class DRACDataModule(pl.LightningDataModule):
         if stage == "fit" or stage is None:
             data_full = datasets.ImageFolder(root=self.data_dir)
             print(len(data_full))
-            self.data_train, self.data_val = random_split(data_full, [516, 100])
+            self.data_train, self.data_val = random_split(data_full, [511, 100])
 
         # Assign test dataset for use in dataloader(s)
         #if stage == "test" or stage is None:
